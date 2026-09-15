@@ -1,0 +1,16 @@
+{
+  "name": "ComfyUI-EagleBridge",
+  "version": "1.0.0",
+  "nodes": [
+    "Eagle Save Image",
+    "Eagle Save Audio",
+    "Eagle Save Video"
+  ],
+  "license": "GPL-3.0",
+  "readme_languages": [
+    "English",
+    "简体中文",
+    "한국어",
+    "日本語"
+  ]
+}
