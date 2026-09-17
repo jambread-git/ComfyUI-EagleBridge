@@ -104,7 +104,7 @@ app.registerExtension({
     name: "EagleBridge.VideoPlayer",
 
     async beforeRegisterNodeDef(nodeType, nodeData) {
-        if (nodeData.name !== "EagleSaveVideo") return;
+        if (!["EagleSaveVideo", "EagleVideoPreview"].includes(nodeData.name)) return;
 
         const originalOnNodeCreated = nodeType.prototype.onNodeCreated;
         const originalOnExecuted = nodeType.prototype.onExecuted;
