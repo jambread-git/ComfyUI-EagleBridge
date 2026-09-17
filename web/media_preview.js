@@ -117,7 +117,9 @@ app.registerExtension({
             video.preload = "metadata";
             video.playsInline = true;
             video.style.width = "100%";
-            video.style.maxHeight = "320px";
+            video.style.height = "100%";
+            video.style.maxHeight = "none";
+            video.style.objectFit = "contain";
             video.style.display = "none";
             video.style.background = "#000";
 
