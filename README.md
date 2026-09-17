@@ -50,18 +50,17 @@ The extension also tries to extract useful generation metadata from the upstream
 
 Every Save node contains an `eagle_folder_id` text field.
 
-- Paste the **Eagle folder ID** of the destination folder.
-- Leave the field blank to save to **Eagle Library Root**.
-- While Eagle is running with a library open, visit:
-  `http://127.0.0.1:41595/api/folder/list`
-- Find the desired folder in the JSON response and copy its `id`.
-- The folder ID is stored directly in the workflow.
+1. In Eagle, right-click the folder you want to save into and choose **Copy Link**.
+2. The copied link will look like this:
 
-Example:
+   ```text
+   http://localhost:41595/folder?id=MU2LXTTH4KVRF
+   ```
 
-```text
-MLZWD86F6YNH4
-```
+3. Copy only the value after `id=` — in this example, `MU2LXTTH4KVRF` — and paste it into `eagle_folder_id`.
+4. Leave `eagle_folder_id` blank to save to **Eagle Library Root**.
+
+The folder ID is stored directly in the workflow.
 
 ## Common filename and folder templates
 
@@ -327,18 +326,17 @@ ComfyUI-EagleBridge 提供三个输出节点，可将 ComfyUI 生成的**图片�
 
 每个 Save 节点都使用 `eagle_folder_id` 文本输入框。
 
-- 粘贴目标文件夹的 **Eagle folder ID**。
-- 留空时保存到 **Eagle Library Root**。
-- Eagle 已启动并打开素材库时，在浏览器访问：
-  `http://127.0.0.1:41595/api/folder/list`
-- 在返回的 JSON 中找到目标文件夹并复制它的 `id`。
-- 文件夹 ID 会直接保存在工作流中。
+1. 在 Eagle 中右键点击要保存到的文件夹，然后选择 **复制链接 / Copy Link**。
+2. 复制出来的链接类似：
 
-示例：
+   ```text
+   http://localhost:41595/folder?id=MU2LXTTH4KVRF
+   ```
 
-```text
-MLZWD86F6YNH4
-```
+3. 只复制 `id=` 后面的值，例如 `MU2LXTTH4KVRF`，然后粘贴到 `eagle_folder_id`。
+4. `eagle_folder_id` 留空时保存到 **Eagle Library Root**。
+
+文件夹 ID 会直接保存在工作流中。
 
 ## 通用文件名与子文件夹模板
 
@@ -469,7 +467,7 @@ FPS: 24
 
 ## 常见问题
 
-- **不知道 folder ID：** 确认 Eagle 已启动并打开素材库，然后在浏览器访问 `http://127.0.0.1:41595/api/folder/list`，找到目标文件夹并复制其 `id`。
+- **不知道 folder ID：** 在 Eagle 中右键点击目标文件夹，选择 **复制链接 / Copy Link**。例如 `http://localhost:41595/folder?id=MU2LXTTH4KVRF`，将 `id=` 后面的 `MU2LXTTH4KVRF` 粘贴到 `eagle_folder_id`。
 - **更新后播放器不显示：** 重启 ComfyUI，使用 `Ctrl+Shift+R`，并删除后重新添加节点。
 - **文件名不同但 Eagle 提示重复：** Eagle 可根据文件内容判断重复，与文件名无关。
 - **MP3/Opus/视频编码失败：** 请检查当前 ComfyUI 环境的 PyAV/FFmpeg/codec 支持。
@@ -523,18 +521,17 @@ ComfyUI-EagleBridge는 ComfyUI에서 생성한 **이미지, 오디오, 비디오
 
 각 Save 노드는 `eagle_folder_id` 텍스트 입력을 사용합니다.
 
-- 저장할 폴더의 **Eagle folder ID**를 붙여 넣습니다.
-- 비워 두면 **Eagle Library Root**에 저장됩니다.
-- Eagle이 실행 중이고 라이브러리가 열려 있을 때 브라우저에서 다음 주소를 엽니다:
-  `http://127.0.0.1:41595/api/folder/list`
-- 반환된 JSON에서 원하는 폴더를 찾고 `id` 값을 복사합니다.
-- 폴더 ID는 워크플로에 직접 저장됩니다.
+1. Eagle에서 저장할 폴더를 마우스 오른쪽 버튼으로 클릭하고 **링크 복사 / Copy Link**를 선택합니다.
+2. 복사된 링크는 다음과 같은 형태입니다:
 
-예:
+   ```text
+   http://localhost:41595/folder?id=MU2LXTTH4KVRF
+   ```
 
-```text
-MLZWD86F6YNH4
-```
+3. `id=` 뒤의 값만 복사합니다. 이 예에서는 `MU2LXTTH4KVRF`이며, 이를 `eagle_folder_id`에 붙여 넣습니다.
+4. `eagle_folder_id`를 비워 두면 **Eagle Library Root**에 저장됩니다.
+
+폴더 ID는 워크플로에 직접 저장됩니다.
 
 ## 공통 파일명/폴더 템플릿
 
@@ -672,18 +669,18 @@ ComfyUI-EagleBridge は、ComfyUIで生成した**画像・音声・動画**を�
 
 各Saveノードは `eagle_folder_id` のテキスト入力方式です。
 
-- 保存先フォルダの **Eagle folder ID** を貼り付けます。
-- 空欄なら **Eagle Library Root** に保存します。
-- Eagleを起動してライブラリを開いた状態で、ブラウザから次を開きます：
-  `http://127.0.0.1:41595/api/folder/list`
-- 返ってきたJSONから保存先フォルダを探し、その `id` をコピーしてください。
-- フォルダIDはワークフローへ直接保存されます。
+1. Eagleで保存したいフォルダを右クリックし、**「リンクをコピー」** を選びます。
+2. コピーされたリンクは次のような形式です。
 
-例：
+   ```text
+   http://localhost:41595/folder?id=MU2LXTTH4KVRF
+   ```
 
-```text
-MLZWD86F6YNH4
-```
+3. `id=` の後ろにある文字列だけをコピーします。この例では `MU2LXTTH4KVRF` です。
+4. そのIDを `eagle_folder_id` に貼り付けます。
+5. `eagle_folder_id` を空欄にすると **Eagle Library Root** へ保存します。
+
+フォルダIDはワークフローへ直接保存されます。
 
 ## 共通：ファイル名テンプレート
 
@@ -945,10 +942,15 @@ ComfyUI側でメタデータ保存が有効な場合、EagleBridgeはComfyUIネ�
 
 ### Eagleのfolder IDが分からない
 
-1. Eagleが起動していることを確認します。
-2. Eagleでライブラリを開きます。
-3. ブラウザで `http://127.0.0.1:41595/api/folder/list` を開きます。
-4. 保存したいフォルダを探し、その `id` を `eagle_folder_id` に貼り付けます。
+1. Eagleで保存したいフォルダを右クリックします。
+2. **「リンクをコピー」** を選びます。
+3. コピーされたリンクを確認します。たとえば：
+
+   ```text
+   http://localhost:41595/folder?id=MU2LXTTH4KVRF
+   ```
+
+4. `id=` の後ろにある `MU2LXTTH4KVRF` のような文字列だけを `eagle_folder_id` に貼り付けます。
 5. `eagle_folder_id` を空欄にするとEagle Library Rootへ保存します。
 
 ### アップデートしたのに古いノード表示のまま
