@@ -1,0 +1,7 @@
+# Repository automation / release metadata
+.github/
+RELEASE.json
+
+# Local/editor noise
+.vscode/
+.idea/
