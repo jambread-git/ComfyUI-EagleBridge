@@ -36,7 +36,7 @@ def _extract_error(data: Any, fallback: str) -> str:
     return fallback
 
 
-def _request_json(method: str, url: str, *, timeout: int, **kwargs) -> dict:
+def _request_json(method: str, url: str, *, timeout: float | None, **kwargs) -> dict:
     try:
         response = requests.request(method, url, timeout=timeout, **kwargs)
         response.raise_for_status()
@@ -65,7 +65,7 @@ def _request_json(method: str, url: str, *, timeout: int, **kwargs) -> dict:
 def get_folder_list(
     host: str = EAGLE_HOST,
     port: int = EAGLE_PORT,
-    timeout: int = EAGLE_LIST_TIMEOUT,
+    timeout: float | None = EAGLE_LIST_TIMEOUT,
 ) -> list[dict]:
     url = f"{make_base_url(host, port)}/folder/list"
     data = _request_json("GET", url, timeout=timeout)
@@ -168,7 +168,7 @@ def add_item_from_path(
     website: str = "",
     host: str = EAGLE_HOST,
     port: int = EAGLE_PORT,
-    timeout: int = EAGLE_ADD_TIMEOUT,
+    timeout: float | None = EAGLE_ADD_TIMEOUT,
 ) -> dict:
     abs_path = os.path.abspath(file_path)
 
