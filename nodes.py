@@ -1108,7 +1108,8 @@ class EagleSaveImage:
             },
         }
 
-    RETURN_TYPES = ()
+    RETURN_TYPES = ("IMAGE",)
+    RETURN_NAMES = ("image",)
     FUNCTION = "run"
     CATEGORY = "EagleBridge"
     OUTPUT_NODE = True
@@ -1219,7 +1220,7 @@ class EagleSaveImage:
                     }
                 )
 
-        result = {"result": ()}
+        result = {"result": (image,)}
         if preview:
             result["ui"] = {"images": previews}
         return result

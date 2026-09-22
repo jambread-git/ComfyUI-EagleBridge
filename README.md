@@ -1,6 +1,8 @@
 # ComfyUI-EagleBridge
 
-**Version 1.0.0**
+![Version](https://img.shields.io/badge/version-1.2.0-2ea44f?style=flat-square)
+![License](https://img.shields.io/badge/license-GPL--3.0-blue?style=flat-square)
+![ComfyUI](https://img.shields.io/badge/ComfyUI-custom%20nodes-6f42c1?style=flat-square)
 
 ComfyUI-EagleBridge adds three output nodes that save generated **images, audio, and video** from ComfyUI and register them directly in an **Eagle** library.
 
@@ -15,9 +17,9 @@ ComfyUI-EagleBridge adds three output nodes that save generated **images, audio,
 
 ## What this extension does
 
-ComfyUI-EagleBridge provides exactly three nodes:
+ComfyUI-EagleBridge provides three Eagle save nodes, plus the bundled Video Preview utility node:
 
-- **Eagle Save Image** — saves an `IMAGE`, sends it to Eagle, and can show an image preview.
+- **Eagle Save Image** — saves an `IMAGE`, sends it to Eagle, can show an image preview, and passes the original `IMAGE` through its output.
 - **Eagle Save Audio** — saves an `AUDIO`, sends it to Eagle, and can show an audio player with a seek bar.
 - **Eagle Save Video** — saves a native ComfyUI `VIDEO`, sends it to Eagle, and can show a video player with a seek bar.
 
@@ -29,6 +31,7 @@ The extension also tries to extract useful generation metadata from the upstream
 - Eagle desktop application running on the same computer.
 - An Eagle library must be open while the nodes are executed.
 - Eagle's local API must be available at the default address `127.0.0.1:41595`.
+- Eagle API requests do not use an application-level timeout; a save waits for Eagle to respond.
 - Python dependency: `requests>=2.31.0`.
 - Audio/video encoding support depends on the PyAV/FFmpeg/codec support available in your ComfyUI environment.
 
@@ -101,11 +104,11 @@ The folder is always kept inside ComfyUI's output/temp directory.
 
 ### How to connect it
 
-Connect any ComfyUI `IMAGE` output directly to the `image` input. This node is an output node, so you do not need a separate standard Save Image node.
+Connect any ComfyUI `IMAGE` output directly to the `image` input. The node also passes the original `IMAGE` through its right-side output so it can continue into downstream nodes. It remains an output node, so you do not need a separate standard Save Image node just to save to Eagle.
 
 ### Inputs
 
-- **image** — ComfyUI `IMAGE` input.
+- **image** — ComfyUI `IMAGE` input. The original value is passed through as the node's `IMAGE` output.
 - **eagle_folder_id** — Eagle destination folder.
 - **file_name_template** — output filename template.
 - **local_subfolder** — local ComfyUI output subfolder. Default: `EagleBridge/Image/%date%/`.
@@ -634,7 +637,7 @@ GNU General Public License v3.0. 자세한 내용은 `LICENSE`를 참조하세�
 
 ComfyUI-EagleBridge は、ComfyUIで生成した**画像・音声・動画**を保存し、そのまま Eagle ライブラリへ登録するための3つの出力ノードを提供します。
 
-- **Eagle Save Image** — `IMAGE` を保存してEagleへ登録。画像プレビュー対応。
+- **Eagle Save Image** — `IMAGE` を保存してEagleへ登録。画像プレビュー対応。元の `IMAGE` を右側の出力へそのまま渡せます。
 - **Eagle Save Audio** — `AUDIO` を保存してEagleへ登録。再生ボタン・シークバー付きプレイヤー対応。
 - **Eagle Save Video** — ComfyUIネイティブ `VIDEO` を保存してEagleへ登録。再生ボタン・シークバー付きプレイヤー対応。
 
@@ -648,6 +651,7 @@ ComfyUI-EagleBridge は、ComfyUIで生成した**画像・音声・動画**を�
 - ComfyUIと同じPCで起動しているEagleデスクトップアプリ。
 - ノード実行時にEagleでライブラリを開いていること。
 - EagleローカルAPIの既定アドレス `127.0.0.1:41595` が利用できること。
+- Eagle API呼び出しにはアプリ側のタイムアウトを設けず、Eagleから応答が返るまで待機します。
 - Python依存パッケージ：`requests>=2.31.0`。
 - 音声・動画のエンコード可否は、ComfyUI環境側のPyAV / FFmpeg / コーデック対応状況にも依存します。
 
@@ -725,7 +729,7 @@ ComfyUI-EagleBridge は、ComfyUIで生成した**画像・音声・動画**を�
 
 画像生成側の `IMAGE` 出力を、そのまま `image` 入力へ接続します。
 
-`Eagle Save Image` 自体が `OUTPUT_NODE` なので、EagleBridgeで保存するだけなら通常の `Save Image` ノードを別に置く必要はありません。
+保存後も元の `IMAGE` を右側の `image` 出力へそのまま渡すため、必要なら後続ノードへ接続できます。`Eagle Save Image` 自体も `OUTPUT_NODE` のままなので、EagleBridgeで保存するだけなら通常の `Save Image` ノードを別に置く必要はありません。
 
 ### 各項目
 
