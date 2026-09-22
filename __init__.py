@@ -1,4 +1,4 @@
-__version__ = "1.2.0"
+__version__ = "1.2.1"
 
 from .nodes import (
     NODE_CLASS_MAPPINGS as EAGLE_NODE_CLASS_MAPPINGS,

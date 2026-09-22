@@ -1,6 +1,6 @@
 {
   "name": "ComfyUI-EagleBridge",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "nodes": [
     "Eagle Save Image",
     "Eagle Save Audio",

@@ -1,10 +1,12 @@
 # ComfyUI-EagleBridge
 
-![Version](https://img.shields.io/badge/version-1.2.0-2ea44f?style=flat-square)
+![Version](https://img.shields.io/badge/version-1.2.1-2ea44f?style=flat-square)
 ![License](https://img.shields.io/badge/license-GPL--3.0-blue?style=flat-square)
 ![ComfyUI](https://img.shields.io/badge/ComfyUI-custom%20nodes-6f42c1?style=flat-square)
 
 ComfyUI-EagleBridge adds three output nodes that save generated **images, audio, and video** from ComfyUI and register them directly in an **Eagle** library.
+
+Published on the **Comfy Registry** as `eagle-bridge`, so it can be discovered and installed from **ComfyUI Manager**.
 
 
 > Unofficial community project. This project is not affiliated with or endorsed by Comfy Org or Eagle.
@@ -36,6 +38,10 @@ The extension also tries to extract useful generation metadata from the upstream
 - Audio/video encoding support depends on the PyAV/FFmpeg/codec support available in your ComfyUI environment.
 
 ## Installation
+
+**ComfyUI Manager:** search for `ComfyUI-EagleBridge` or `eagle-bridge` and install it directly.
+
+**Manual installation:**
 
 1. Stop ComfyUI.
 2. Copy the `ComfyUI-EagleBridge` folder into `ComfyUI/custom_nodes/`.
@@ -656,6 +662,10 @@ ComfyUI-EagleBridge は、ComfyUIで生成した**画像・音声・動画**を�
 - 音声・動画のエンコード可否は、ComfyUI環境側のPyAV / FFmpeg / コーデック対応状況にも依存します。
 
 ## インストール
+
+**ComfyUI Manager:** `ComfyUI-EagleBridge` または `eagle-bridge` で検索して、そのままインストールできます。
+
+**手動インストール:**
 
 1. ComfyUIを完全に終了します。
 2. `ComfyUI-EagleBridge` フォルダを `ComfyUI/custom_nodes/` に配置します。
