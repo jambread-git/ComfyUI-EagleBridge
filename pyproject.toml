@@ -1,0 +1,17 @@
+[project]
+name = "eagle-bridge"
+version = "1.2.0"
+description = "Save ComfyUI images, audio, and video directly to Eagle with metadata and previews."
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.31.0",
+]
+
+[project.urls]
+Repository = "https://github.com/jambread-git/ComfyUI-EagleBridge"
+"Bug Tracker" = "https://github.com/jambread-git/ComfyUI-EagleBridge/issues"
+
+[tool.comfy]
+PublisherId = "jambread"
+DisplayName = "ComfyUI-EagleBridge"
