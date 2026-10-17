@@ -6,13 +6,13 @@
 
 ## 功能简介
 
-ComfyUI-EagleBridge 提供三个输出节点，可将 ComfyUI 生成的**图片、音频和视频**保存后直接登记到 Eagle 素材库：
+ComfyUI-EagleBridge 提供三个输出节点（另含 Video Preview 预览工具节点），可将 ComfyUI 生成的**图片、音频和视频**保存后直接登记到 Eagle 素材库：
 
-- **Eagle Save Image** — 保存 `IMAGE`，发送到 Eagle，并可显示图片预览。
+- **Eagle Save Image** — 保存 `IMAGE`，发送到 Eagle，可显示图片预览，并将原始 `IMAGE` 透传给输出。
 - **Eagle Save Audio** — 保存 `AUDIO`，发送到 Eagle，并可显示带进度条的音频播放器。
 - **Eagle Save Video** — 保存 ComfyUI 原生 `VIDEO`，发送到 Eagle，并可显示带进度条的视频播放器。
 
-插件还会尽量从上游工作流中提取生成信息，并写入 Eagle 的标签和注释。
+每次保存都会尽量从上游工作流中提取生成信息（提示词、模型、尺寸、Seed、步数、CFG、采样器等），写入 Eagle 的标签和注释。对于只在运行时合成提示词的工作流（如 `MOSSImageLayoutPrompt`），可用可选的 `prompt` 输入插口记录准确文本。
 
 > 非官方社区项目，与 Comfy Org 或 Eagle 官方无隶属或背书关系。
 

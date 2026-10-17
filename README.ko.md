@@ -6,13 +6,13 @@
 
 ## 개요
 
-ComfyUI-EagleBridge는 ComfyUI에서 생성한 **이미지, 오디오, 비디오**를 저장한 뒤 Eagle 라이브러리에 바로 등록하는 세 개의 출력 노드를 제공합니다.
+ComfyUI-EagleBridge는 ComfyUI에서 생성한 **이미지, 오디오, 비디오**를 저장한 뒤 Eagle 라이브러리에 바로 등록하는 세 개의 출력 노드(함께 포함된 Video Preview 미리보기 유틸리티 노드도 제공)를 제공합니다.
 
-- **Eagle Save Image** — `IMAGE` 저장 + Eagle 등록 + 이미지 미리보기.
+- **Eagle Save Image** — `IMAGE` 저장 + Eagle 등록 + 이미지 미리보기, 원본 `IMAGE`는 출력 그대로 통과.
 - **Eagle Save Audio** — `AUDIO` 저장 + Eagle 등록 + 재생/탐색 가능한 오디오 플레이어.
 - **Eagle Save Video** — ComfyUI 네이티브 `VIDEO` 저장 + Eagle 등록 + 재생/탐색 가능한 비디오 플레이어.
 
-상류 워크플로에서 생성 메타데이터를 가능한 범위에서 찾아 Eagle 태그/주석에도 기록합니다.
+저장 시 상류 워크플로에서 생성 메타데이터(프롬프트, 모델, 크기, 시드, 스텝, CFG, 샘플러 등)를 가능한 범위에서 찾아 Eagle 태그/주석에 기록합니다. 프롬프트를 실행 중에만 합성하는 워크플로(`MOSSImageLayoutPrompt` 등)에는 선택형 `prompt` 입력 소켓으로 정확한 텍스트를 남길 수 있습니다.
 
 > 비공식 커뮤니티 프로젝트이며 Comfy Org 또는 Eagle의 공식 프로젝트/승인 제품이 아닙니다.
 

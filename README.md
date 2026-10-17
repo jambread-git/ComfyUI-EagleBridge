@@ -4,7 +4,7 @@
 ![License](https://img.shields.io/badge/license-GPL--3.0-blue?style=flat-square)
 ![ComfyUI](https://img.shields.io/badge/ComfyUI-custom%20nodes-6f42c1?style=flat-square)
 
-ComfyUI-EagleBridge adds three output nodes that save generated **images, audio, and video** from ComfyUI and register them directly in an **Eagle** library.
+ComfyUI-EagleBridge adds three output nodes that save generated **images, audio, and video** from ComfyUI and register them directly in an **Eagle** library — with in-node previews and generation metadata (prompts, model, seed, …) written into Eagle.
 
 Published on the **Comfy Registry** as `eagle-bridge`, so it can be discovered and installed from **ComfyUI Manager**.
 
@@ -23,7 +23,7 @@ ComfyUI-EagleBridge provides three Eagle save nodes, plus the bundled Video Prev
 - **Eagle Save Audio** — saves an `AUDIO`, sends it to Eagle, and can show an audio player with a seek bar.
 - **Eagle Save Video** — saves a native ComfyUI `VIDEO`, sends it to Eagle, and can show a video player with a seek bar.
 
-The extension also tries to extract useful generation metadata from the upstream workflow and writes it into Eagle as tags/annotations.
+The extension also extracts generation metadata from the upstream workflow — prompts, model, size, seed, steps, CFG, sampler, and more — and writes it into Eagle as tags and annotations. For workflows that compose the prompt only at runtime (e.g. `MOSSImageLayoutPrompt`), an optional `prompt` input socket records the exact text.
 
 ## Requirements
 

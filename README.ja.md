@@ -6,13 +6,13 @@
 
 ## 概要
 
-ComfyUI-EagleBridge は、ComfyUIで生成した**画像・音声・動画**を保存し、そのまま Eagle ライブラリへ登録するための3つの出力ノードを提供します。
+ComfyUI-EagleBridge は、ComfyUIで生成した**画像・音声・動画**を保存し、そのまま Eagle ライブラリへ登録する3つの出力ノード（＋Video Previewプレビュー用ユーティリティノード）を提供します。
 
 - **Eagle Save Image** — `IMAGE` を保存してEagleへ登録。画像プレビュー対応。元の `IMAGE` を右側の出力へそのまま渡せます。
 - **Eagle Save Audio** — `AUDIO` を保存してEagleへ登録。再生ボタン・シークバー付きプレイヤー対応。
 - **Eagle Save Video** — ComfyUIネイティブ `VIDEO` を保存してEagleへ登録。再生ボタン・シークバー付きプレイヤー対応。
 
-さらに、上流ワークフローから取得できる生成情報を自動で抽出し、Eagleのタグとアノテーションへ整理して記録します。
+保存のたびに、上流ワークフローから生成情報（プロンプト・モデル・サイズ・Seed・Steps・CFG・Samplerなど）を自動で抽出し、Eagleのタグとアノテーションへ整理して記録します。実行時にのみプロンプトを組み立てるワークフロー（`MOSSImageLayoutPrompt`など）には、オプションの`prompt`入力ソケットで正確なテキストを記録できます。
 
 > 非公式のコミュニティプロジェクトです。Comfy OrgおよびEagle公式とは提携・公認関係にありません。
 
