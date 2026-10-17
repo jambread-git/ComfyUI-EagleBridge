@@ -1,6 +1,6 @@
 # ComfyUI-EagleBridge
 
-![Version](https://img.shields.io/badge/version-1.2.1-2ea44f?style=flat-square)
+![Version](https://img.shields.io/badge/version-1.2.2-2ea44f?style=flat-square)
 ![License](https://img.shields.io/badge/license-GPL--3.0-blue?style=flat-square)
 ![ComfyUI](https://img.shields.io/badge/ComfyUI-custom%20nodes-6f42c1?style=flat-square)
 
