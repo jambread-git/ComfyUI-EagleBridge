@@ -376,12 +376,16 @@ def extract_text_from_node(prompt, node_id, visited=None):
             if isinstance(text, str) and text.strip():
                 return text.strip()
 
-        text_value = inputs.get("text")
-        if isinstance(text_value, str) and text_value.strip():
-            return text_value.strip()
+        # Some prompt nodes store their literal text under other input names
+        # (prompt / value / string / caption), e.g. TextEncodeQwenImage21 or
+        # primitive string nodes. Check those too before following links.
+        for key in ("text", "prompt", "value", "string", "caption"):
+            text_value = inputs.get(key)
+            if isinstance(text_value, str) and text_value.strip():
+                return text_value.strip()
 
         next_ids = []
-        for key in ("conditioning", "cond", "base_cond", "added_cond", "clip", "text"):
+        for key in ("conditioning", "cond", "base_cond", "added_cond", "clip", "text", "prompt"):
             linked = get_linked_node_id(inputs.get(key))
             if linked:
                 next_ids.append(linked)
@@ -866,6 +870,19 @@ def build_annotation(
 
     return "\n".join(lines).strip()
 
+def apply_prompt_override(metadata, prompt_text, key: str):
+    """
+    Let users wire a runtime-composed prompt (e.g. MOSSImageLayoutPrompt's
+    STRING output) into the save node, because prompts built at runtime are
+    not visible anywhere in the prompt graph and cannot be auto-extracted.
+    """
+    if not isinstance(metadata, dict):
+        return
+    override = str(prompt_text or "").strip()
+    if override:
+        metadata[key] = override
+
+
 def merge_annotation(memo_text, generated_annotation):
     memo = (memo_text or "").strip()
     auto_text = (generated_annotation or "").strip()
@@ -1101,6 +1118,19 @@ class EagleSaveImage:
                 "memo": ("STRING", {"default": "", "multiline": True}),
                 "website": ("STRING", {"default": "", "multiline": False}),
             },
+            "optional": {
+                "prompt_text": (
+                    "STRING",
+                    {
+                        "forceInput": True,
+                        "tooltip": (
+                            "Optional. Connect a node that composes the prompt at runtime "
+                            "(e.g. MOSSImageLayoutPrompt) so its text is recorded too. "
+                            "Overrides the auto-extracted positive prompt."
+                        ),
+                    },
+                ),
+            },
             "hidden": {
                 "prompt": "PROMPT",
                 "extra_pnginfo": "EXTRA_PNGINFO",
@@ -1127,6 +1157,7 @@ class EagleSaveImage:
         preview,
         memo,
         website,
+        prompt_text=None,
         prompt=None,
         extra_pnginfo=None,
         unique_id=None,
@@ -1134,6 +1165,7 @@ class EagleSaveImage:
         folder_id = normalize_eagle_folder_id(eagle_folder_id)
         prompt_graph = normalize_prompt(prompt)
         metadata = extract_sampler_metadata(prompt_graph, unique_id)
+        apply_prompt_override(metadata, prompt_text, "positive_prompt")
 
         output_root = folder_paths.get_output_directory()
         temp_root = folder_paths.get_temp_directory()
@@ -1271,6 +1303,19 @@ class EagleSaveAudio:
                 "memo": ("STRING", {"default": "", "multiline": True}),
                 "website": ("STRING", {"default": "", "multiline": False}),
             },
+            "optional": {
+                "prompt_text": (
+                    "STRING",
+                    {
+                        "forceInput": True,
+                        "tooltip": (
+                            "Optional. Connect a node that composes the prompt/lyrics at "
+                            "runtime so its text is recorded too. "
+                            "Overrides the auto-extracted audio prompt."
+                        ),
+                    },
+                ),
+            },
             "hidden": {
                 "prompt": "PROMPT",
                 "unique_id": "UNIQUE_ID",
@@ -1295,6 +1340,7 @@ class EagleSaveAudio:
         preview,
         memo,
         website,
+        prompt_text=None,
         prompt=None,
         unique_id=None,
     ):
@@ -1310,6 +1356,7 @@ class EagleSaveAudio:
         folder_id = normalize_eagle_folder_id(eagle_folder_id)
         prompt_graph = normalize_prompt(prompt)
         metadata = build_audio_metadata(prompt_graph, unique_id)
+        apply_prompt_override(metadata, prompt_text, "audio_prompt")
 
         output_root = folder_paths.get_output_directory()
         temp_root = folder_paths.get_temp_directory()
@@ -1449,6 +1496,19 @@ class EagleSaveVideo:
                 "memo": ("STRING", {"default": "", "multiline": True}),
                 "website": ("STRING", {"default": "", "multiline": False}),
             },
+            "optional": {
+                "prompt_text": (
+                    "STRING",
+                    {
+                        "forceInput": True,
+                        "tooltip": (
+                            "Optional. Connect a node that composes the prompt at runtime "
+                            "so its text is recorded too. "
+                            "Overrides the auto-extracted video prompt."
+                        ),
+                    },
+                ),
+            },
             "hidden": {
                 "prompt": "PROMPT",
                 "extra_pnginfo": "EXTRA_PNGINFO",
@@ -1474,6 +1534,7 @@ class EagleSaveVideo:
         preview,
         memo,
         website,
+        prompt_text=None,
         prompt=None,
         extra_pnginfo=None,
         unique_id=None,
@@ -1493,6 +1554,7 @@ class EagleSaveVideo:
         folder_id = normalize_eagle_folder_id(eagle_folder_id)
         prompt_graph = normalize_prompt(prompt)
         metadata = build_video_metadata(prompt_graph, unique_id)
+        apply_prompt_override(metadata, prompt_text, "video_prompt")
 
         output_root = folder_paths.get_output_directory()
         temp_root = folder_paths.get_temp_directory()

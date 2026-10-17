@@ -71,6 +71,24 @@ Every Save node contains an `eagle_folder_id` text field.
 
 The folder ID is stored directly in the workflow.
 
+## Recording prompts built at runtime (`prompt_text`)
+
+The Save nodes normally read the prompt text from the workflow graph
+(`CLIPTextEncode` and similar text nodes). Some nodes compose the prompt only
+at runtime — for example `MOSSImageLayoutPrompt` builds it from layout
+elements — so no literal text exists in the graph and it cannot be
+auto-extracted.
+
+For those workflows, every Save node now has an optional input socket
+named `prompt` (internally `prompt_text`) — no text box, just a plug:
+
+1. Connect the STRING output of the node that builds the prompt
+   (e.g. `MOSSImageLayoutPrompt` → `prompt`) into `prompt_text`.
+2. The connected text is recorded as the Positive Prompt (or Prompt for
+   audio/video) in the Eagle annotation, overriding auto-extraction.
+
+Leave `prompt_text` unconnected for normal workflows — nothing changes.
+
 ## Common filename and folder templates
 
 ### `file_name_template`
@@ -347,6 +365,22 @@ ComfyUI-EagleBridge 提供三个输出节点，可将 ComfyUI 生成的**图片�
 
 文件夹 ID 会直接保存在工作流中。
 
+## 记录运行时生成的提示词（`prompt_text`）
+
+保存节点通常从工作流图中读取提示词文本（如 `CLIPTextEncode`）。
+但有些节点只在运行时生成提示词——例如 `MOSSImageLayoutPrompt`
+根据布局元素合成提示词——图中不存在字面文本，无法自动提取。
+
+这类工作流请使用各保存节点新增的可选输入插口 `prompt`
+（内部键名为 `prompt_text`，只有连接插口，没有文本框）：
+
+1. 将生成提示词的节点的 STRING 输出（如 `MOSSImageLayoutPrompt` 的
+   `prompt` 输出）连接到 `prompt_text`。
+2. 连接的文本会作为正向提示词（音频/视频为 Prompt）写入 Eagle 备注，
+   并覆盖自动提取结果。
+
+普通工作流不连接 `prompt_text` 即可，行为完全不变。
+
 ## 通用文件名与子文件夹模板
 
 ### `file_name_template`
@@ -542,6 +576,25 @@ ComfyUI-EagleBridge는 ComfyUI에서 생성한 **이미지, 오디오, 비디오
 
 폴더 ID는 워크플로에 직접 저장됩니다.
 
+## 런타임에 생성되는 프롬프트 기록 (`prompt_text`)
+
+Save 노드는 일반적으로 워크플로 그래프에서 프롬프트 텍스트를 읽습니다
+(`CLIPTextEncode` 등). 그러나 일부 노드는 실행 시에만 프롬프트를 생성합니다.
+예를 들어 `MOSSImageLayoutPrompt`는 레이아웃 요소로 프롬프트를 조합하므로
+그래프에 텍스트가 존재하지 않아 자동 추출이 불가능합니다.
+
+이런 워크플로를 위해 모든 Save 노드에 `prompt`라는 선택 입력 소켓
+(내부 키는 `prompt_text`, 텍스트 상자가 아닌 연결 플러그만 표시됩니다)이
+추가되었습니다:
+
+1. 프롬프트를 생성하는 노드의 STRING 출력
+   (예: `MOSSImageLayoutPrompt` → `prompt`)을 `prompt` 소켓에 연결합니다.
+2. 연결된 텍스트가 Eagle 주석의 Positive Prompt(오디오/영상은 Prompt)로
+   기록되며 자동 추출 결과를 덮어씁니다.
+
+일반적인 워크플로에서는 `prompt` 소켓을 연결하지 않으면 기존과 동일하게
+동작합니다.
+
 ## 공통 파일명/폴더 템플릿
 
 `file_name_template` 기본값은 `%datetime%_%rand%`입니다.
@@ -695,6 +748,24 @@ ComfyUI-EagleBridge は、ComfyUIで生成した**画像・音声・動画**を�
 5. `eagle_folder_id` を空欄にすると **Eagle Library Root** へ保存します。
 
 フォルダIDはワークフローへ直接保存されます。
+
+## 実行時に生成されるプロンプトの記録（`prompt_text`）
+
+Saveノードは通常、ワークフローグラフ上からプロンプトテキストを読み取ります
+（`CLIPTextEncode`など）。一方、一部のノードは実行時にのみプロンプトを生成します。
+例えば`MOSSImageLayoutPrompt`はレイアウト要素からプロンプトを組み立てるため、
+グラフ中にテキストが存在せず自動抽出できません。
+
+こうしたワークフローのために、すべてのSaveノードに`prompt`という名前の
+オプション入力ソケット（内部キーは`prompt_text`。テキスト欄ではなく接続プラグのみ表示）が
+追加されました：
+
+1. プロンプトを生成するノードのSTRING出力
+   （例：`MOSSImageLayoutPrompt`の`prompt`出力）を`prompt`ソケットへ接続します。
+2. 接続されたテキストがEagleのメモのPositive Prompt（音声・動画はPrompt）として
+   記録され、自動抽出の結果を上書きします。
+
+通常のワークフローでは`prompt`ソケットを接続しなければ従来通りです。
 
 ## 共通：ファイル名テンプレート
 

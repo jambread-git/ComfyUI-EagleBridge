@@ -1,5 +1,26 @@
 {
   "EagleVideoPreview": {
     "display_name": "ビデオプレビュー"
+  },
+  "EagleSaveImage": {
+    "inputs": {
+      "prompt_text": {
+        "name": "prompt"
+      }
+    }
+  },
+  "EagleSaveAudio": {
+    "inputs": {
+      "prompt_text": {
+        "name": "prompt"
+      }
+    }
+  },
+  "EagleSaveVideo": {
+    "inputs": {
+      "prompt_text": {
+        "name": "prompt"
+      }
+    }
   }
 }
